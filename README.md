@@ -20,7 +20,7 @@ map_native: "0.0.2"
 ``` dart
 
 import 'package:flutter/material.dart';
-import 'flutter_native_map.dart';
+import 'package:map_native/map_native.dart';
 
 void main() => runApp(new MyApp());
 
