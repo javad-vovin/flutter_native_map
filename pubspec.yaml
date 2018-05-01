@@ -1,5 +1,5 @@
 name: map_native
-description: A new flutter package project.
+description: Map widget for Flutter written in Dart.
 version: 0.0.1
 authors:
     - Mahdi K. Fard <mahdi3466@gmail.com>
