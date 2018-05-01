@@ -20,15 +20,19 @@ import 'package:map_native/map_native.dart';
 void main() {
   runApp(new Scaffold(
     body: new Stack(
-              children: [
-                new MapView(),
-                new IconButton(
-                    onPressed: () {},
-                    padding: const EdgeInsets.all(8.0),
-                    icon: new Icon(Icons.my_location,
-                        color: Theme.of(context).primaryColor))
-              ],
-            ),
+		children: [
+			new MapView(),
+			new Align(
+				alignment: Alignment.bottomRight,
+				child: new Padding(
+					padding: const EdgeInsets.all(16.0),
+					child: new FloatingActionButton(
+						backgroundColor: theme.cardColor,
+						onPressed: () {},
+						child: new Icon(Icons.my_location,
+							color: Theme.of(context).primaryColor))))
+			],
+    );
   ));
 }
 
