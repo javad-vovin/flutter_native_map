@@ -181,17 +181,12 @@ class MapViewState extends State<MapView> {
     final stack = new Stack(children: children);
 
     final gesture = new GestureDetector(
-      child: stack,
-      onPanUpdate: _onPanUpdate,
-      onDoubleTap: _onDoubleTap,
-      //onScaleUpdate: _onScaleUpdate
-    );
+        child: stack,
+        onDoubleTap: _onDoubleTap,
+        onScaleStart: _onScaleStart,
+        onScaleUpdate: _onScaleUpdate);
 
     return gesture;
-  }
-
-  void _onPanUpdate(DragUpdateDetails details) {
-    drag(details.delta.dx, details.delta.dy);
   }
 
   void _onDoubleTap() {
@@ -200,17 +195,25 @@ class MapViewState extends State<MapView> {
     });
   }
 
+  Offset dragStart;
+  void _onScaleStart(ScaleStartDetails details) {
+    dragStart = details.focalPoint;
+  }
+
   void _onScaleUpdate(ScaleUpdateDetails details) {
     if (details.scale > 1) {
       setState(() {
-        _zoom *= 1.05;
+        _zoom += 0.01;
       });
     } else if (details.scale < 1) {
       setState(() {
-        _zoom /= 1.05;
+        _zoom -= 0.01;
       });
-
-      drag(details.focalPoint.dx, details.focalPoint.dy);
+    } else {
+      final now = details.focalPoint;
+      final diff = now - dragStart;
+      dragStart = now;
+      drag(diff.dx, diff.dy);
     }
   }
 
