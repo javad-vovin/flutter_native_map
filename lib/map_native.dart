@@ -196,18 +196,23 @@ class MapViewState extends State<MapView> {
   }
 
   Offset dragStart;
+  double scaleStart = 1.0;
   void _onScaleStart(ScaleStartDetails details) {
     dragStart = details.focalPoint;
+    scaleStart = 1.0;
   }
 
   void _onScaleUpdate(ScaleUpdateDetails details) {
-    if (details.scale > 1) {
+    final scaleDiff = details.scale - scaleStart;
+    scaleStart = details.scale;
+
+    if (scaleDiff > 0) {
       setState(() {
-        _zoom += 0.01;
+        _zoom += 0.02;
       });
-    } else if (details.scale < 1) {
+    } else if (scaleDiff < 0) {
       setState(() {
-        _zoom -= 0.01;
+        _zoom -= 0.02;
       });
     } else {
       final now = details.focalPoint;
