@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
     final inline0 = new Card(
         child: new Stack(
       children: [
-        new MapView(),
+        new MapView(
+            initialLocation: const LatLong(35.68, 51.41),
+            inititialZoom: 9.0),
         new Align(
             alignment: Alignment.bottomRight,
             child: new Padding(
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
     final inline1 = new Card(
         child: new Stack(
       children: [
-        new MapView(),
+        new MapView(
+            initialLocation: const LatLong(48.8566, 2.3522),
+            inititialZoom: 9.0),
         new Align(
             alignment: Alignment.bottomRight,
             child: new Padding(
@@ -47,11 +51,13 @@ class MyApp extends StatelessWidget {
             ),
             body: new Column(children: [
               new Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new Expanded(child: inline0)),
+                  padding: const EdgeInsets.all(4.0),
+                  child:
+                      new AspectRatio(child: inline0, aspectRatio: 16.0 / 9.0)),
               new Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new Expanded(child: inline1)),
+                  padding: const EdgeInsets.all(4.0),
+                  child:
+                      new AspectRatio(child: inline1, aspectRatio: 16.0 / 9.0)),
             ])));
   }
 }
