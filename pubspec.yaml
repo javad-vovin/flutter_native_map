@@ -1,6 +1,6 @@
 name: map_native
 description: Map widget for Flutter written in Dart. Supports Android and iOS.
-version: 0.0.6
+version: 0.0.7
 authors:
     - Mahdi K. Fard <mahdi3466@gmail.com>
 homepage: https://github.com/xclud/flutter_native_map

@@ -11,10 +11,10 @@ class TileIndex {
 }
 
 class LatLong {
-  double lat;
-  double long;
+  final double lat;
+  final double long;
 
-  LatLong(this.lat, this.long);
+  const LatLong(this.lat, this.long);
 }
 
 abstract class Projection {
@@ -97,7 +97,13 @@ class GoogleProvider extends MapProvider {
 }
 
 class MapView extends StatefulWidget {
-  MapView({Key key}) : super(key: key);
+  final LatLong initialLocation;
+  final double inititialZoom;
+  MapView(
+      {Key key,
+      this.initialLocation: const LatLong(35.73, 51.40),
+      this.inititialZoom: 14.0})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -107,15 +113,21 @@ class MapView extends StatefulWidget {
 
 class MapViewState extends State<MapView> {
   static const double _TILE_SIZE = 256.0;
+  LatLong _location = new LatLong(35.71, 51.41);
+  double _zoom = 14.0;
+  MapProvider provider = new GoogleProvider();
+
+  @override
+  void initState() {
+    _location = widget.initialLocation;
+    _zoom = widget.inititialZoom;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return new LayoutBuilder(builder: _build);
   }
-
-  LatLong _location = new LatLong(35.71, 51.41);
-  double _zoom = 14.0;
-  MapProvider provider = new GoogleProvider();
 
   Widget _build(BuildContext context, BoxConstraints constraints) {
     final size = constraints.biggest;
