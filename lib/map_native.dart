@@ -99,16 +99,18 @@ class GoogleProvider extends MapProvider {
 class MapView extends StatefulWidget {
   final LatLong initialLocation;
   final double inititialZoom;
+  final ValueChanged<LatLong> locationCallback;
+  final ValueChanged<double> zoomCallback;
   MapView(
       {Key key,
       this.initialLocation: const LatLong(35.73, 51.40),
-      this.inititialZoom: 14.0})
+      this.inititialZoom: 14.0,
+      this.locationCallback, 
+      this.zoomCallback})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return new MapViewState();
-  }
+  State<StatefulWidget> createState() => MapViewState();
 }
 
 class MapViewState extends State<MapView> {
@@ -255,6 +257,7 @@ class MapViewState extends State<MapView> {
   set location(LatLong location) {
     setState(() {
       _location = location;
+      widget.locationCallback(_location);
     });
   }
 
@@ -265,6 +268,7 @@ class MapViewState extends State<MapView> {
   set zoom(double zoom) {
     setState(() {
       _zoom = zoom;
+      widget.zoomCallback(_zoom);
     });
   }
 }
