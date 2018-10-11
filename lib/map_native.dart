@@ -206,7 +206,8 @@ class MapViewState extends State<MapView> {
   void _onDoubleTap() {
     setState(() {
       _zoom += 0.5;
-    });
+      widget.zoomCallback(_zoom);
+   });
   }
 
   Offset dragStart;
@@ -223,10 +224,12 @@ class MapViewState extends State<MapView> {
     if (scaleDiff > 0) {
       setState(() {
         _zoom += 0.02;
+        widget.zoomCallback(_zoom);
       });
     } else if (scaleDiff < 0) {
       setState(() {
         _zoom -= 0.02;
+        widget.zoomCallback(_zoom);
       });
     } else {
       final now = details.focalPoint;
@@ -247,7 +250,8 @@ class MapViewState extends State<MapView> {
 
     setState(() {
       _location = EPSG4326.instance.fromTileIndexToLngLat(mon);
-    });
+       widget.locationCallback(_location);
+   });
   }
 
   LatLong get location {
@@ -257,7 +261,6 @@ class MapViewState extends State<MapView> {
   set location(LatLong location) {
     setState(() {
       _location = location;
-      widget.locationCallback(_location);
     });
   }
 
@@ -268,7 +271,6 @@ class MapViewState extends State<MapView> {
   set zoom(double zoom) {
     setState(() {
       _zoom = zoom;
-      widget.zoomCallback(_zoom);
     });
   }
 }
