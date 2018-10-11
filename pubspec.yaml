@@ -7,7 +7,7 @@ homepage: https://github.com/xclud/flutter_native_map
 
 environment:
   sdk: ">=1.19.0 <3.0.0"
-  flutter: "^0.3.2"
+  flutter: "^0.10.1-pre.24"
 dependencies:
   flutter:
     sdk: flutter
